@@ -2,6 +2,14 @@
 <head>
 </head>
 <body>
-<h1>Hello World</h1>
+<h1>List of EC2 instances</h1>
+<table>
+{% for instance in instances %}
+<tr>
+	<td>{{ instance.id }}</td>
+	<td>{{ instance.instance_type}}</td>
+</tr>
+{% endfor %}
+</table>
 </body>
 </html>
