@@ -7,7 +7,9 @@
 {% for instance in instances %}
 <tr>
 	<td>{{ instance.id }}</td>
+	<td>{{ instance.name }}</td>
 	<td>{{ instance.instance_type}}</td>
+	<td>{{ instance.powerState}}</td>
 </tr>
 {% endfor %}
 </table>
