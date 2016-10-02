@@ -21,7 +21,7 @@ virtualenv env
 or on Linux:
 `source env/bin/activate`
 
-Create an IAM user that only has permission to describe and power on instances [Example policy](../blob/master/exampleIAMpolicy.json) and either use `aws configure` or set the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` environment variables.
+Create an IAM user that only has permission to describe and power on instances ([Example policy](../master/exampleIAMpolicy.json)) and either use `aws configure` or set the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` environment variables.
 
 ```
 pip install -r requirements
