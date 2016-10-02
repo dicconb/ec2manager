@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from helpers import util
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
-
 
 def list_EC2_instances(request):
 	if util.check_necessary_permissions('eu-west-1') == True:	
@@ -11,6 +11,7 @@ def list_EC2_instances(request):
 	else:
 		return render(request, 'startstop/error.html', {'error': 'Insufficient IAM permissions to start instances. Please check with the administrator.'})
 
+@login_required
 def start_instance(request):
 	if request.method == 'POST':
 		try:
