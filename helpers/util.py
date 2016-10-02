@@ -1,4 +1,5 @@
 import boto3
+import botocore
 import re
 
 #https://github.com/russellballestrini/botoform/blob/master/botoform/util.py
@@ -33,8 +34,16 @@ def listInstances(region, nameregex='^.*$'):
             parsedinstances.append(parsedinstance)
     return parsedinstances
 
-def startInstance(instancename, region):
+def get_instance_id_by_name(instancename, region):
     ec2 = boto3.resource('ec2',region)
     namefilter = [ { 'Name' : 'tag:Name', 'Values' : [instancename] } ]
     instance = list(ec2.instances.filter(Filters=namefilter))[0]
-    print(instance.id)
+    return instance.id
+
+def start_instance_by_id(instanceid, region):
+    ec2 = boto3.resource('ec2',region)
+    try:
+        ec2.instances.filter(InstanceIds=[instanceid]).start()
+        return True
+    except botocore.exceptions.ClientError as e:
+        return e.response['Error'] #['Message']
