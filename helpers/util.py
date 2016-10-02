@@ -33,3 +33,8 @@ def listInstances(region, nameregex='^.*$'):
             parsedinstances.append(parsedinstance)
     return parsedinstances
 
+def startInstance(instancename, region):
+    ec2 = boto3.resource('ec2',region)
+    namefilter = [ { 'Name' : 'tag:Name', 'Values' : [instancename] } ]
+    instance = list(ec2.instances.filter(Filters=namefilter))[0]
+    print(instance.id)
