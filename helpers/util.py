@@ -47,3 +47,14 @@ def start_instance_by_id(instanceid, region):
         return True
     except botocore.exceptions.ClientError as e:
         return e.response['Error'] #['Message']
+
+def check_necessary_permissions(region):
+    try:
+        ec2 = boto3.resource('ec2',region)
+        ec2.instances.limit(1).start(DryRun=True)
+    except botocore.exceptions.ClientError as e:
+        if e.response['Error']['Code'] == 'UnauthorizedOperation':
+            return "Insufficient IAM permissions"
+        if e.response['Error']['Code'] == 'DryRunOperation':
+            return True
+    
