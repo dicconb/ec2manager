@@ -2,7 +2,7 @@
 {% block content %}
 
 <div class="container">
-<form method="POST" class="post-form">{% csrf_token %}
+<form method="POST" action="{% url 'start_instance' %}">{% csrf_token %}
 <table class="table">
 <tr>
 	<th>Instance ID</th><th>Instance Name</th><th>Instance Type</th><th>Power State</th><th>Select</th>
