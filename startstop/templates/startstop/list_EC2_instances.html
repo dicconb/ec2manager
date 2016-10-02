@@ -5,12 +5,13 @@
 <form method="POST" action="{% url 'start_instance' %}">{% csrf_token %}
 <table class="table">
 <tr>
-	<th>Instance ID</th><th>Instance Name</th><th>Instance Type</th><th>Power State</th><th>Select</th>
+	<th>Instance ID</th><th>Instance Name</th><th>Allocated To</th><th>Instance Type</th><th>Power State</th><th>Select</th>
 </tr>
 {% for instance in instances %}
 <tr>
 	<td>{{ instance.id }}</td>
 	<td>{{ instance.name }}</td>
+	<td>{{ instance.allocatedto }}</td>
 	<td>{{ instance.instance_type}}</td>
 	<td>{{ instance.powerState}}</td>
 	<td><input type="radio" name="instanceid" value="{{ instance.id }}" /></td>

@@ -28,6 +28,7 @@ def listInstances(region, nameregex='^.*$'):
         if re.match (nameregex, tags['Name']):
             parsedinstance = ParsedEC2Instance()
             parsedinstance.name = tags['Name']
+            parsedinstance.allocatedto = tags['allocatedto']
             parsedinstance.id = instance.id
             parsedinstance.instance_type = instance.instance_type
             parsedinstance.powerState = instance.state['Name']
