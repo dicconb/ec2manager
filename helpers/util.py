@@ -2,14 +2,6 @@ import boto3
 import re
 
 #https://github.com/russellballestrini/botoform/blob/master/botoform/util.py
-def tag_filter(tag_key, tag_values):
-    """
-    Return a tag filter document expected by boto3.
-    :param tag_key: A tag key or name.
-    :param tag_values: The tag value or a list of values to filter on.
-    :returns: A filter document (list/dict) in the form that Boto3 expects.
-    """
-    return make_filter('tag:{}'.format(tag_key), tag_values)
 def make_tag_dict(ec2_object):
     """
     Return a dictionary of existing tags.
@@ -23,7 +15,8 @@ def make_tag_dict(ec2_object):
     return tag_dict
 
 class ParsedEC2Instance(object):
-    pass
+    def __repr__(self):
+        return self.name
 
 def listInstances(region, nameregex='^.*$'):
     ec2 = boto3.resource('ec2',region)
@@ -31,7 +24,7 @@ def listInstances(region, nameregex='^.*$'):
     parsedinstances = []
     for instance in instances:
         tags = make_tag_dict(instance)
-        if re.match (namepattern, tags['Name']):
+        if re.match (nameregex, tags['Name']):
             parsedinstance = ParsedEC2Instance()
             parsedinstance.name = tags['Name']
             parsedinstance.id = instance.id
@@ -39,3 +32,4 @@ def listInstances(region, nameregex='^.*$'):
             parsedinstance.powerState = instance.state['Name']
             parsedinstances.append(parsedinstance)
     return parsedinstances
+
