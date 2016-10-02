@@ -1,9 +1,11 @@
-<html>
-<head>
-</head>
-<body>
-<h1>List of EC2 instances</h1>
-<table>
+{% extends 'startstop/base.html' %}
+{% block content %}
+
+<div class="container">
+<table class="table">
+<tr>
+	<th>Instance ID</th><th>Instance Name</th><th>Instance Type</th><th>Power State</th>
+</tr>
 {% for instance in instances %}
 <tr>
 	<td>{{ instance.id }}</td>
@@ -13,5 +15,5 @@
 </tr>
 {% endfor %}
 </table>
-</body>
-</html>
+</div>
+{% endblock %}
