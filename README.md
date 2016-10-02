@@ -12,11 +12,7 @@ You need Python (3.5) and virtualenv to get started. Further requirements are in
 
 ### Installing
 
-```
-git clone https://github.com/dicconb/ec2manager.git
-
-
-Create and activate a virtual environment
+Create and activate a virtual environment with virtualenv
 ```
 cd ec2manager
 virtualenv env
